@@ -18,7 +18,7 @@ export default function App() {
           </Routes>
         </main>
         <footer className="border-t border-slate-200 py-6 text-center text-xs text-slate-400">
-          CAP-Inst-CPOL · Base: Nota Técnica de Parametrização — SMS-Rio
+          Base: Nota Técnica de Parametrização — SMS-Rio
         </footer>
       </div>
     </BrowserRouter>
