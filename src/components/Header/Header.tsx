@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Activity, Calculator, ClipboardList, Info } from "lucide-react";
+import { Calculator, ClipboardList, Info } from "lucide-react";
 
 const navItemClass = ({ isActive }: { isActive: boolean }) =>
   `flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
@@ -11,9 +11,11 @@ export default function Header() {
     <header className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <NavLink to="/" className="flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-teal-accent text-white shadow-md">
-            <Activity className="h-6 w-6" strokeWidth={2.25} />
-          </span>
+          <img
+            src="/logo-sms-rio.png"
+            alt="Prefeitura do Rio — Saúde / SUS"
+            className="h-12 w-auto sm:h-14"
+          />
           <span className="leading-tight">
             <span className="block text-lg font-bold tracking-tight text-slate-900">
               Coordenação de Policlínicas - CPOL
