@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
-import Home from "./pages/Home/Home";
 import Procedimentos from "./pages/Procedimentos/Procedimentos";
 import Calculadora from "./pages/Calculadora/Calculadora";
 import Informacoes from "./pages/Informacoes/Informacoes";
@@ -12,7 +11,7 @@ export default function App() {
         <Header />
         <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Procedimentos />} />
             <Route path="/procedimentos" element={<Procedimentos />} />
             <Route path="/calculadora" element={<Calculadora />} />
             <Route path="/informacoes" element={<Informacoes />} />

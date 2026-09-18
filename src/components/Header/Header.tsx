@@ -31,7 +31,7 @@ export default function Header() {
             <Calculator className="h-4 w-4" />
             <span className="hidden sm:inline">Calculadora</span>
           </NavLink>
-          <NavLink to="/procedimentos" className={navItemClass}>
+          <NavLink to="/" end className={navItemClass}>
             <ClipboardList className="h-4 w-4" />
             <span className="hidden sm:inline">Procedimentos</span>
           </NavLink>
