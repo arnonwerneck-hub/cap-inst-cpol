@@ -170,12 +170,12 @@ export default function Calculator({ codigoInicial }: CalculatorProps) {
               corTexto="text-slate-900"
               destaque
             />
-            <ResultBox titulo="Reserva" valor={resultado.reservaOperacional} corTexto="text-blue-700" cor="bg-blue-50" />
+            <ResultBox titulo="Reserva (Primeira-Vez)" valor={resultado.reservaOperacional} corTexto="text-blue-700" cor="bg-blue-50" />
             <ResultBox titulo="Retorno" valor={resultado.retornoOperacional} corTexto="text-emerald-700" cor="bg-emerald-50" />
           </div>
 
           <p className="mt-4 text-center text-sm font-semibold text-slate-500">
-            {selecionado.reserva} Reserva : {selecionado.retorno} Retorno{selecionado.retorno > 0 ? "s" : ""}
+            {selecionado.reserva} Reserva (Primeira-Vez) : {selecionado.retorno} Retorno{selecionado.retorno > 0 ? "s" : ""}
           </p>
 
           <div className="mt-5 flex items-start gap-2 rounded-xl bg-white px-4 py-3 text-xs text-slate-500 ring-1 ring-slate-100">
