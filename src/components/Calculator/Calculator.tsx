@@ -1,12 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { AlertTriangle, ArrowLeftRight, Info, Search } from "lucide-react";
+import { AlertTriangle, Info, Search } from "lucide-react";
 import { procedimentos, type Procedimento } from "../../data/procedimentos";
 import { correspondeABusca } from "../../utils/busca";
-import {
-  calcularCargaHorariaNecessaria,
-  calcularOfertaOperacional,
-  formatarNumero,
-} from "../../utils/calculos";
+import { calcularOfertaOperacional, formatarNumero } from "../../utils/calculos";
 
 const CARGAS_SIMULACAO = [5, 10, 15, 20, 25, 30, 35, 40];
 
@@ -25,7 +21,6 @@ export default function Calculator({ codigoInicial }: CalculatorProps) {
   const [busca, setBusca] = useState("");
   const [selecionado, setSelecionado] = useState<Procedimento | null>(null);
   const [mostrarSugestoes, setMostrarSugestoes] = useState(false);
-  const [quantidadeDesejadaInput, setQuantidadeDesejadaInput] = useState("");
 
   useEffect(() => {
     if (codigoInicial) {
@@ -50,12 +45,6 @@ export default function Calculator({ codigoInicial }: CalculatorProps) {
     if (!selecionado || cargaHoraria <= 0) return null;
     return calcularOfertaOperacional(cargaHoraria, selecionado);
   }, [selecionado, cargaHoraria]);
-
-  const quantidadeDesejada = parseNumeroBR(quantidadeDesejadaInput);
-  const cargaNecessaria = useMemo(() => {
-    if (!selecionado || quantidadeDesejada <= 0) return null;
-    return calcularCargaHorariaNecessaria(quantidadeDesejada, selecionado.consultasPorHora);
-  }, [selecionado, quantidadeDesejada]);
 
   function selecionarProcedimento(p: Procedimento) {
     setSelecionado(p);
@@ -195,48 +184,6 @@ export default function Calculator({ codigoInicial }: CalculatorProps) {
           </div>
         </div>
       )}
-
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="flex items-center gap-2 text-lg font-bold text-slate-900">
-          <ArrowLeftRight className="h-5 w-5 text-brand-600" />
-          Quantas horas são necessárias?
-        </h2>
-        <p className="mt-1 text-sm text-slate-500">
-          Informe a quantidade de procedimentos desejada por semana para descobrir a carga horária
-          necessária, considerando a parametrização do procedimento selecionado acima.
-        </p>
-
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <div>
-            <label className="text-sm font-semibold text-slate-700">Quantidade de procedimentos desejada</label>
-            <input
-              type="text"
-              inputMode="decimal"
-              value={quantidadeDesejadaInput}
-              onChange={(e) => setQuantidadeDesejadaInput(e.target.value)}
-              placeholder="Ex: 60"
-              className="mt-1.5 w-full rounded-xl border border-slate-200 px-4 py-3 text-lg font-bold text-slate-800 outline-none focus:border-brand-400 focus:ring-4 focus:ring-brand-100"
-            />
-          </div>
-          <div className="flex flex-col items-center justify-center rounded-xl bg-slate-50 p-4">
-            {cargaNecessaria !== null && selecionado ? (
-              <>
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                  Carga horária necessária
-                </p>
-                <p className="mt-1 text-3xl font-extrabold text-brand-700">
-                  {formatarNumero(cargaNecessaria, 2)}h
-                </p>
-                <p className="mt-1 text-xs text-slate-400">por semana</p>
-              </>
-            ) : (
-              <p className="text-center text-sm text-slate-400">
-                Selecione um procedimento e informe a quantidade desejada.
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

@@ -1,38 +1,20 @@
 import { useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Filters, {
-  correspondeFaixaPorHora,
-  correspondeFaixaTempo,
-  type FaixaPorHora,
-  type FaixaTempo,
-} from "../../components/Filters/Filters";
 import ProcedimentoCard from "../../components/ProcedimentoCard/ProcedimentoCard";
 import ProcedimentoDetails from "../../components/ProcedimentoDetails/ProcedimentoDetails";
 import { procedimentos } from "../../data/procedimentos";
 import { correspondeABusca } from "../../utils/busca";
-import { getCategoria, listarCategorias } from "../../utils/categorias";
 
 export default function Procedimentos() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [busca, setBusca] = useState(searchParams.get("busca") ?? "");
-  const [categoriaAtiva, setCategoriaAtiva] = useState("Todos");
-  const [faixaPorHora, setFaixaPorHora] = useState<FaixaPorHora>("todos");
-  const [faixaTempo, setFaixaTempo] = useState<FaixaTempo>("todos");
   const [detalheCodigo, setDetalheCodigo] = useState<string | null>(null);
 
-  const categorias = useMemo(() => listarCategorias(procedimentos), []);
-
   const resultados = useMemo(() => {
-    return procedimentos.filter((p) => {
-      if (!correspondeABusca(busca, p.codigo, p.procedimento)) return false;
-      if (categoriaAtiva !== "Todos" && getCategoria(p.procedimento) !== categoriaAtiva) return false;
-      if (!correspondeFaixaPorHora(p.consultasPorHora, faixaPorHora)) return false;
-      if (!correspondeFaixaTempo(p.tempoMinutos, faixaTempo)) return false;
-      return true;
-    });
-  }, [busca, categoriaAtiva, faixaPorHora, faixaTempo]);
+    return procedimentos.filter((p) => correspondeABusca(busca, p.codigo, p.procedimento));
+  }, [busca]);
 
   const procedimentoDetalhe = procedimentos.find((p) => p.codigo === detalheCodigo) ?? null;
 
@@ -46,16 +28,6 @@ export default function Procedimentos() {
       </div>
 
       <SearchBar value={busca} onChange={setBusca} />
-
-      <Filters
-        categorias={categorias}
-        categoriaAtiva={categoriaAtiva}
-        onCategoriaChange={setCategoriaAtiva}
-        faixaPorHora={faixaPorHora}
-        onFaixaPorHoraChange={setFaixaPorHora}
-        faixaTempo={faixaTempo}
-        onFaixaTempoChange={setFaixaTempo}
-      />
 
       {resultados.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

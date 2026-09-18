@@ -68,15 +68,6 @@ export function calcularOfertaOperacional(
   return { ofertaExata, ofertaOperacional, reservaOperacional, retornoOperacional };
 }
 
-/**
- * Calculadora reversa (item 18 do prompt):
- * Carga horária necessária = Quantidade desejada ÷ Procedimentos por hora
- */
-export function calcularCargaHorariaNecessaria(quantidadeDesejada: number, consultasPorHora: number): number {
-  if (consultasPorHora === 0) return 0;
-  return quantidadeDesejada / consultasPorHora;
-}
-
 export function formatarNumero(valor: number, casasDecimais = 1): string {
   const arredondado = Math.round(valor * 10 ** casasDecimais) / 10 ** casasDecimais;
   return arredondado.toLocaleString("pt-BR", {
