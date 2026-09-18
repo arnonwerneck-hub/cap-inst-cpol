@@ -9,12 +9,12 @@ const navItemClass = ({ isActive }: { isActive: boolean }) =>
 export default function Header() {
   return (
     <header className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6">
         <NavLink to="/" className="flex items-center gap-3">
           <img
             src="/logo-sms-rio.png"
             alt="Prefeitura do Rio — Saúde / SUS"
-            className="h-12 w-auto sm:h-14"
+            className="h-16 w-auto sm:h-20"
           />
           <span className="leading-tight">
             <span className="block text-lg font-bold tracking-tight text-slate-900">
